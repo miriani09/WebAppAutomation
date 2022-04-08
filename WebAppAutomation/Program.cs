@@ -16,9 +16,10 @@ namespace WebAppAutomation
             Console.WriteLine("browser started");
 
             //Task1
-            internet.fileUpload();
+            /*internet.fileUpload();*/
 
             //Task2
+            internet.shiftingContent();
 
 
 
