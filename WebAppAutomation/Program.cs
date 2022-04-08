@@ -19,9 +19,10 @@ namespace WebAppAutomation
             /*internet.fileUpload();*/
 
             //Task2
-            internet.shiftingContent();
+            /*internet.shiftingContent();*/
 
-
+            //Task3
+            internet.ChalengingDOM();
 
             internet.closeBrowser();
         }

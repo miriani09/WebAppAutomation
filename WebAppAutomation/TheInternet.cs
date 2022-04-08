@@ -61,14 +61,25 @@ namespace WebAppAutomation
 
                 driver.Navigate().Back();
                 driver.FindElement(By.LinkText("Example 2: An image")).Click();
-                driver.FindElement(By.LinkText("click here")).Click();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    driver.FindElement(By.CssSelector("[href*='?pixel_shift=100']")).Click();
+                    Console.WriteLine("Photo Changed!");
+                }
 
                 Console.WriteLine("Test Passed");
+
             }
             catch (Exception)
             {
                 Console.WriteLine("Test Failed");
             }
+        }
+
+        public void ChalengingDOM()
+        {
+
         }
 
         public void closeBrowser()
