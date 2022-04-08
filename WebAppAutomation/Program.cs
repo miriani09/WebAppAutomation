@@ -22,7 +22,7 @@ namespace WebAppAutomation
             /*internet.shiftingContent();*/
 
             //Task3
-            internet.ChalengingDOM();
+            internet.ChallengingDOM();
 
             internet.closeBrowser();
         }

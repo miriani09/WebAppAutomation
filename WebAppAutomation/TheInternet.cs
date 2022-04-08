@@ -15,7 +15,6 @@ namespace WebAppAutomation
     internal class TheInternet
     {
         IWebDriver driver;
-        IWebElement ele;
 
         public void startBrowser()
         {
@@ -38,7 +37,7 @@ namespace WebAppAutomation
                 driver.FindElement(By.Id("file-submit")).Click();
 
                 Console.WriteLine("Test Passed!");
-                Thread.Sleep(2000);
+                Thread.Sleep(3000);
                 driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
             catch (Exception)
@@ -69,7 +68,8 @@ namespace WebAppAutomation
                 }
 
                 Console.WriteLine("Test Passed");
-
+                Thread.Sleep(3000);
+                driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
             catch (Exception)
             {
@@ -77,9 +77,24 @@ namespace WebAppAutomation
             }
         }
 
-        public void ChalengingDOM()
+        public void ChallengingDOM()
         {
+            driver.FindElement(By.LinkText("Challenging DOM")).Click();
+            int rowsCount = driver.FindElements(By.XPath("//*[@id='content']/div/div/div/div[2]/table/tbody/tr")).Count;
+            Console.WriteLine("All rows: "+rowsCount);
 
+            int count = 0;
+            for (int i = 1; i <= rowsCount; i++)
+            {
+                IWebElement elemTable = driver.FindElement(By.XPath($"//*[@id='content']/div/div/div/div[2]/table/tbody/tr[{i}]/td[1]"));
+
+                string texts = elemTable.Text;
+                if (texts.EndsWith("0"))
+                {
+                    count += 1;
+                    Console.WriteLine($"In First Column are {count}-Texts Wich Ends Zero And This Texts are '{texts}'");
+                }
+            }
         }
 
         public void closeBrowser()
