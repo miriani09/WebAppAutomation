@@ -16,15 +16,19 @@ namespace WebAppAutomation
             Console.WriteLine("browser started");
 
             //Task1
-            /*internet.fileUpload();*/
+            internet.fileUpload();
 
             //Task2
-            /*internet.shiftingContent();*/
+            internet.shiftingContent();
 
             //Task3
             internet.ChallengingDOM();
 
-            internet.closeBrowser();
+            //Task4
+            internet.MultipleWindows();
+
+
+            /*internet.closeBrowser();*/
         }
     }
 }

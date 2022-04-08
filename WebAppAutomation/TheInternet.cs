@@ -37,7 +37,7 @@ namespace WebAppAutomation
                 driver.FindElement(By.Id("file-submit")).Click();
 
                 Console.WriteLine("Test Passed!");
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
             catch (Exception)
@@ -68,7 +68,7 @@ namespace WebAppAutomation
                 }
 
                 Console.WriteLine("Test Passed");
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
                 driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
             catch (Exception)
@@ -79,26 +79,64 @@ namespace WebAppAutomation
 
         public void ChallengingDOM()
         {
-            driver.FindElement(By.LinkText("Challenging DOM")).Click();
-            int rowsCount = driver.FindElements(By.XPath("//*[@id='content']/div/div/div/div[2]/table/tbody/tr")).Count;
-            Console.WriteLine("All rows: "+rowsCount);
-
-            int count = 0;
-            for (int i = 1; i <= rowsCount; i++)
+            try
             {
-                IWebElement elemTable = driver.FindElement(By.XPath($"//*[@id='content']/div/div/div/div[2]/table/tbody/tr[{i}]/td[1]"));
+                driver.FindElement(By.LinkText("Challenging DOM")).Click();
+                int rowsCount = driver.FindElements(By.XPath("//*[@id='content']/div/div/div/div[2]/table/tbody/tr")).Count;
+                Console.WriteLine("All rows: " + rowsCount);
 
-                string texts = elemTable.Text;
-                if (texts.EndsWith("0"))
+                int count = 0;
+                for (int i = 1; i <= rowsCount; i++)
                 {
-                    count += 1;
-                    Console.WriteLine($"In First Column are {count}-Texts Wich Ends Zero And This Texts are '{texts}'");
+                    IWebElement elemTable = driver.FindElement(By.XPath($"//*[@id='content']/div/div/div/div[2]/table/tbody/tr[{i}]/td[1]"));
+
+                    string texts = elemTable.Text;
+                    if (texts.EndsWith("0"))
+                    {
+                        count += 1;
+                        Console.WriteLine($"In First Column are {count}-Texts Wich Ends Zero And This Texts are '{texts}'");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"This '{texts}' - texts does not end in zero");
+                    }
                 }
+                Console.WriteLine("Test Passed");
+                Thread.Sleep(2000);
+                driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Test Failed");
+            }
+        }
+
+        public void MultipleWindows()
+        {
+            try
+            {
+                driver.FindElement(By.LinkText("Multiple Windows")).Click();
+                driver.FindElement(By.XPath("//*[@id='content']/div/a")).Click();
+
+                driver.SwitchTo().Window(driver.WindowHandles[1]);
+
+                driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/windows/new");
+                IWebElement title = driver.FindElement(By.XPath("/html/body/div/h3"));
+
+                if (title.Text.Contains("New Window"))
+                {
+                    Console.WriteLine("Test Passed");
+                }
+            }
+            catch (Exception )
+            {
+                Console.WriteLine("Test Failed");
             }
         }
 
         public void closeBrowser()
         {
+            driver.Quit();
         }
 
     }
