@@ -5,6 +5,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -35,8 +36,11 @@ namespace WebAppAutomation
                 driver.FindElement(By.Id("file-upload")).SendKeys(file);
 
                 driver.FindElement(By.Id("file-submit")).Click();
-
-                Console.WriteLine("Test Passed!");
+                IWebElement txt = driver.FindElement(By.XPath("//*[@id='content']/div/h3"));
+                if (txt.Text == "File Uploaded!")
+                {
+                    Console.WriteLine("Test Passed!");
+                }
                 Thread.Sleep(2000);
                 driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
@@ -56,18 +60,21 @@ namespace WebAppAutomation
                 IWebElement element = driver.FindElement(By.LinkText("Home"));
                 Actions action = new Actions(driver);
                 action.MoveToElement(element).Perform();
-                Thread.Sleep(3000);
+                Thread.Sleep(2000);
 
                 driver.Navigate().Back();
                 driver.FindElement(By.LinkText("Example 2: An image")).Click();
 
-                for (int i = 0; i < 4; i++)
-                {
-                    driver.FindElement(By.CssSelector("[href*='?pixel_shift=100']")).Click();
-                    Console.WriteLine("Photo Changed!");
-                }
 
-                Console.WriteLine("Test Passed");
+                driver.FindElement(By.XPath("//*[@id='content']/div/p[3]/a")).Click();
+
+                string imgPixel = driver.FindElement(By.XPath("//*[@id='content']/div/img")).GetCssValue("left");
+                Console.WriteLine(imgPixel);
+
+                if (imgPixel == "-100px" || imgPixel == "0px")
+                {
+                    Console.WriteLine("Test Passed");
+                }
                 Thread.Sleep(2000);
                 driver.Navigate().GoToUrl("https://the-internet.herokuapp.com/");
             }
