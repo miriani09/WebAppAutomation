@@ -19,16 +19,16 @@ namespace WebAppAutomation
             internet.fileUpload();
 
             //Task2
-            /*internet.shiftingContent();*/
+            internet.shiftingContent();
 
             //Task3
-            /*internet.ChallengingDOM();*/
+            internet.ChallengingDOM();
 
             //Task4
-            /*internet.MultipleWindows();*/
+            internet.MultipleWindows();
 
 
-            /*internet.closeBrowser();*/
+            internet.closeBrowser();
         }
     }
 }
