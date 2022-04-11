@@ -58,17 +58,18 @@ namespace WebAppAutomation
                 IWebElement element = driver.FindElement(By.LinkText("Home"));
                 Actions action = new Actions(driver);
                 action.MoveToElement(element).Perform();
+                string fontHover = driver.FindElement(By.XPath("//*[@id='content']/div/ul/li[1]/a")).GetCssValue("font-size");
+                if (fontHover == "20px")
+                {
+                    Console.WriteLine("Test Passed");
+                }
                 Thread.Sleep(2000);
-
                 driver.Navigate().Back();
+
+
                 driver.FindElement(By.LinkText("Example 2: An image")).Click();
-
-
                 driver.FindElement(By.XPath("//*[@id='content']/div/p[3]/a")).Click();
-
                 string imgPixel = driver.FindElement(By.XPath("//*[@id='content']/div/img")).GetCssValue("left");
-                Console.WriteLine(imgPixel);
-
                 if (imgPixel == "-100px" || imgPixel == "0px")
                 {
                     Console.WriteLine("Test Passed");
