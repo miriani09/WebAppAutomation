@@ -1,11 +1,8 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -37,6 +34,7 @@ namespace WebAppAutomation
 
                 driver.FindElement(By.Id("file-submit")).Click();
                 IWebElement txt = driver.FindElement(By.XPath("//*[@id='content']/div/h3"));
+
                 if (txt.Text == "File Uploaded!")
                 {
                     Console.WriteLine("Test Passed!");
